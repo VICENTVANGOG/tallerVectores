@@ -1,0 +1,93 @@
+import java.util.Random;
+
+public class MultiplicacionMatrizVector {
+
+    public static void main(String[] args) {
+
+        Random aleatorio = new Random();
+
+        int cantidadFilas = 4;
+        int cantidadColumnas = 5;
+
+        int[][] matriz = new int[cantidadFilas][cantidadColumnas];
+
+        int[] vector = new int[cantidadColumnas];
+
+        int[] resultado = new int[cantidadFilas];
+
+        // Llenar matriz
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+
+            for (int columna = 0;
+                 columna < cantidadColumnas;
+                 columna++) {
+
+                matriz[fila][columna] =
+                        aleatorio.nextInt(10) + 1;
+            }
+        }
+
+        // Llenar vector
+        for (int indice = 0;
+             indice < cantidadColumnas;
+             indice++) {
+
+            vector[indice] =
+                    aleatorio.nextInt(10) + 1;
+        }
+
+        // Multiplicar matriz por vector
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+
+            resultado[fila] = 0;
+
+            for (int columna = 0;
+                 columna < cantidadColumnas;
+                 columna++) {
+
+                resultado[fila] +=
+                        matriz[fila][columna] * vector[columna];
+            }
+        }
+
+        // Mostrar matriz
+        System.out.println("Matriz:");
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+
+            for (int columna = 0;
+                 columna < cantidadColumnas;
+                 columna++) {
+
+                System.out.print(
+                        matriz[fila][columna] + "\t"
+                );
+            }
+
+            System.out.println();
+        }
+
+        // Mostrar vector
+        System.out.println("\nVector:");
+
+        for (int indice = 0;
+             indice < cantidadColumnas;
+             indice++) {
+
+            System.out.print(vector[indice] + " ");
+        }
+
+        // Mostrar resultado
+        System.out.println("\n\nResultado:");
+
+        for (int indice = 0;
+             indice < cantidadFilas;
+             indice++) {
+
+            System.out.println(
+                    "Resultado[" + indice + "] = "
+                    + resultado[indice]
+            );
+        }
+    }
+}

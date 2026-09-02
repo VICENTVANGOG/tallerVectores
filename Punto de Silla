@@ -1,0 +1,91 @@
+import java.util.Random;
+
+public class PuntoDeSilla {
+
+    public static void main(String[] args) {
+
+        Random aleatorio = new Random();
+
+        int cantidadFilas = 4;
+        int cantidadColumnas = 5;
+
+        int[][] matriz = new int[cantidadFilas][cantidadColumnas];
+
+        int[] filasPuntoSilla =
+                new int[cantidadFilas * cantidadColumnas];
+
+        int[] columnasPuntoSilla =
+                new int[cantidadFilas * cantidadColumnas];
+
+        int cantidadPuntosSilla = 0;
+
+        // Llenar matriz
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+                matriz[fila][columna] = aleatorio.nextInt(10) + 1;
+            }
+        }
+
+        // Buscar puntos de silla
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+
+            int valorMinimo = matriz[fila][0];
+            int columnaMinima = 0;
+
+            // Buscar mínimo de la fila
+            for (int columna = 1; columna < cantidadColumnas; columna++) {
+
+                if (matriz[fila][columna] < valorMinimo) {
+                    valorMinimo = matriz[fila][columna];
+                    columnaMinima = columna;
+                }
+            }
+
+            boolean esMayorDeColumna = true;
+
+            // Comprobar si es máximo de la columna
+            for (int otraFila = 0; otraFila < cantidadFilas; otraFila++) {
+
+                if (matriz[otraFila][columnaMinima] > valorMinimo) {
+                    esMayorDeColumna = false;
+                    break;
+                }
+            }
+
+            if (esMayorDeColumna) {
+
+                filasPuntoSilla[cantidadPuntosSilla] = fila;
+                columnasPuntoSilla[cantidadPuntosSilla] = columnaMinima;
+
+                cantidadPuntosSilla++;
+            }
+        }
+
+        System.out.println("Matriz:");
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+            System.out.println();
+        }
+
+        System.out.println("\nPuntos de silla:");
+
+        for (int posicion = 0; posicion < cantidadPuntosSilla; posicion++) {
+
+            int fila = filasPuntoSilla[posicion];
+            int columna = columnasPuntoSilla[posicion];
+
+            System.out.println(
+                    "Fila: " + fila +
+                    " Columna: " + columna +
+                    " Valor: " + matriz[fila][columna]
+            );
+        }
+
+        if (cantidadPuntosSilla == 0) {
+            System.out.println("No se encontraron puntos de silla.");
+        }
+    }
+}

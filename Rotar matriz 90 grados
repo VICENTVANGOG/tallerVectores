@@ -1,0 +1,74 @@
+import java.util.Random;
+
+public class RotarMatriz90 {
+
+    public static void main(String[] args) {
+
+        Random aleatorio = new Random();
+
+        int dimension = 5;
+
+        int[][] matriz = new int[dimension][dimension];
+
+        // Llenar matriz
+        for (int fila = 0; fila < dimension; fila++) {
+            for (int columna = 0; columna < dimension; columna++) {
+                matriz[fila][columna] = aleatorio.nextInt(100) + 1;
+            }
+        }
+
+        System.out.println("Matriz original:");
+
+        for (int fila = 0; fila < dimension; fila++) {
+            for (int columna = 0; columna < dimension; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+            System.out.println();
+        }
+
+        // Transpuesta
+        for (int fila = 0; fila < dimension; fila++) {
+
+            for (int columna = fila + 1;
+                 columna < dimension;
+                 columna++) {
+
+                int temporal = matriz[fila][columna];
+
+                matriz[fila][columna] =
+                        matriz[columna][fila];
+
+                matriz[columna][fila] = temporal;
+            }
+        }
+
+        // Invertir cada fila HOLA
+        for (int fila = 0; fila < dimension; fila++) {
+
+            int izquierda = 0;
+            int derecha = dimension - 1;
+
+            while (izquierda < derecha) {
+
+                int temporal = matriz[fila][izquierda];
+
+                matriz[fila][izquierda] =
+                        matriz[fila][derecha];
+
+                matriz[fila][derecha] = temporal;
+
+                izquierda++;
+                derecha--;
+            }
+        }
+
+        System.out.println("\nMatriz rotada 90 grados:");
+
+        for (int fila = 0; fila < dimension; fila++) {
+            for (int columna = 0; columna < dimension; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}

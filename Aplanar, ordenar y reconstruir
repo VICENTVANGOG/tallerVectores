@@ -1,0 +1,85 @@
+import java.util.Random;
+
+public class AplanarOrdenarReconstruir {
+
+    public static void main(String[] args) {
+
+        Random aleatorio = new Random();
+
+        int cantidadFilas = 4;
+        int cantidadColumnas = 5;
+
+        int[][] matriz = new int[cantidadFilas][cantidadColumnas];
+
+        int cantidadElementos = cantidadFilas * cantidadColumnas;
+
+        int[] vector = new int[cantidadElementos];
+
+        // Llenar matriz con números aleatorios
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+                matriz[fila][columna] = aleatorio.nextInt(100) + 1;
+            }
+        }
+
+        System.out.println("Matriz original:");
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+            System.out.println();
+        }
+
+        // Pasar matriz al vector
+        int indiceVector = 0;
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+
+                vector[indiceVector] = matriz[fila][columna];
+
+                indiceVector++;
+            }
+        }
+
+        // Ordenamiento Burbuja
+        for (int pasada = 0; pasada < cantidadElementos - 1; pasada++) {
+
+            for (int indice = 0;
+                 indice < cantidadElementos - 1 - pasada;
+                 indice++) {
+
+                if (vector[indice] > vector[indice + 1]) {
+
+                    int temporal = vector[indice];
+
+                    vector[indice] = vector[indice + 1];
+
+                    vector[indice + 1] = temporal;
+                }
+            }
+        }
+
+        // Reconstruir matriz
+        indiceVector = 0;
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+
+                matriz[fila][columna] = vector[indiceVector];
+
+                indiceVector++;
+            }
+        }
+
+        System.out.println("\nMatriz ordenada:");
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}

@@ -1,0 +1,95 @@
+import java.util.Random;
+
+public class RecorridoEspiral {
+
+    public static void main(String[] args) {
+
+        Random aleatorio = new Random();
+
+        int cantidadFilas = 4;
+        int cantidadColumnas = 5;
+
+        int[][] matriz = new int[cantidadFilas][cantidadColumnas];
+
+        // Llenar matriz HOLSA
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+                matriz[fila][columna] = aleatorio.nextInt(100) + 1;
+            }
+        }
+
+        System.out.println("Matriz:");
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+            System.out.println();
+        }
+
+        int limiteSuperior = 0;
+        int limiteInferior = cantidadFilas - 1;
+        int limiteIzquierdo = 0;
+        int limiteDerecho = cantidadColumnas - 1;
+
+        System.out.println("\nRecorrido en espiral:");
+
+        while (limiteSuperior <= limiteInferior &&
+               limiteIzquierdo <= limiteDerecho) {
+
+            // Superior: izquierda a derecha
+            for (int columna = limiteIzquierdo;
+                 columna <= limiteDerecho;
+                 columna++) {
+
+                System.out.print(
+                        matriz[limiteSuperior][columna] + " "
+                );
+            }
+
+            limiteSuperior++;
+
+            // Derecha: arriba hacia abajo
+            for (int fila = limiteSuperior;
+                 fila <= limiteInferior;
+                 fila++) {
+
+                System.out.print(
+                        matriz[fila][limiteDerecho] + " "
+                );
+            }
+
+            limiteDerecho--;
+
+            // Inferior: derecha a izquierda
+            if (limiteSuperior <= limiteInferior) {
+
+                for (int columna = limiteDerecho;
+                     columna >= limiteIzquierdo;
+                     columna--) {
+
+                    System.out.print(
+                            matriz[limiteInferior][columna] + " "
+                    );
+                }
+
+                limiteInferior--;
+            }
+
+            // Izquierda: abajo hacia arriba
+            if (limiteIzquierdo <= limiteDerecho) {
+
+                for (int fila = limiteInferior;
+                     fila >= limiteSuperior;
+                     fila--) {
+
+                    System.out.print(
+                            matriz[fila][limiteIzquierdo] + " "
+                    );
+                }
+
+                limiteIzquierdo++;
+            }
+        }
+    }
+}

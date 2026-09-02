@@ -1,0 +1,52 @@
+import java.util.Random;
+
+public class SumasEnVectores {
+
+    public static void main(String[] args) {
+
+        Random aleatorio = new Random();
+
+        int cantidadFilas = 4;
+        int cantidadColumnas = 5;
+
+        int[][] matriz = new int[cantidadFilas][cantidadColumnas];
+
+        int[] sumaFilas = new int[cantidadFilas];
+        int[] sumaColumnas = new int[cantidadColumnas];
+
+        // Llenar matriz y calcular sumas
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+
+                matriz[fila][columna] = aleatorio.nextInt(10) + 1;
+
+                sumaFilas[fila] += matriz[fila][columna];
+                sumaColumnas[columna] += matriz[fila][columna];
+            }
+        }
+
+        System.out.println("Matriz:");
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+
+            for (int columna = 0; columna < cantidadColumnas; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+
+            System.out.println();
+        }
+
+        System.out.println("\nSuma de las filas:");
+
+        for (int fila = 0; fila < cantidadFilas; fila++) {
+            System.out.println("Fila " + fila + ": " + sumaFilas[fila]);
+        }
+
+        System.out.println("\nSuma de las columnas:");
+
+        for (int columna = 0; columna < cantidadColumnas; columna++) {
+            System.out.println("Columna " + columna + ": " + sumaColumnas[columna]);
+        }
+    }
+}

@@ -1,0 +1,66 @@
+import java.util.Random;
+
+public class InvertirDiagonalPrincipal {
+
+    public static void main(String[] args) {
+
+        Random aleatorio = new Random();
+
+        int dimension = 5;
+
+        int[][] matriz = new int[dimension][dimension];
+
+        int[] diagonalPrincipal = new int[dimension];
+
+        // Llenar matriz
+        for (int fila = 0; fila < dimension; fila++) {
+            for (int columna = 0; columna < dimension; columna++) {
+                matriz[fila][columna] = aleatorio.nextInt(100) + 1;
+            }
+        }
+
+        System.out.println("Matriz original:");
+
+        for (int fila = 0; fila < dimension; fila++) {
+            for (int columna = 0; columna < dimension; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+            System.out.println();
+        }
+
+        // Extraer diagonal
+        for (int indice = 0; indice < dimension; indice++) {
+            diagonalPrincipal[indice] = matriz[indice][indice];
+        }
+
+        // Invertir diagonal
+        for (int izquierda = 0;
+             izquierda < dimension / 2;
+             izquierda++) {
+
+            int derecha = dimension - 1 - izquierda;
+
+            int temporal = diagonalPrincipal[izquierda];
+
+            diagonalPrincipal[izquierda] =
+                    diagonalPrincipal[derecha];
+
+            diagonalPrincipal[derecha] = temporal;
+        }
+
+        // Reemplazar diagonal
+        for (int indice = 0; indice < dimension; indice++) {
+            matriz[indice][indice] =
+                    diagonalPrincipal[indice];
+        }
+
+        System.out.println("\nMatriz con diagonal invertida:");
+
+        for (int fila = 0; fila < dimension; fila++) {
+            for (int columna = 0; columna < dimension; columna++) {
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}

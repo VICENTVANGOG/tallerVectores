@@ -4,79 +4,170 @@ public class PuntoDeSilla {
 
     public static void main(String[] args) {
 
+        // Creamos un objeto Random para generar números aleatorios
         Random aleatorio = new Random();
 
+        // Definimos la cantidad de filas y columnas de la matriz
         int cantidadFilas = 4;
         int cantidadColumnas = 5;
 
+        // Creamos una matriz de 4 filas por 5 columnas
         int[][] matriz = new int[cantidadFilas][cantidadColumnas];
 
+        // Arreglo para guardar las filas donde se encuentran
+        // los puntos de silla
         int[] filasPuntoSilla =
                 new int[cantidadFilas * cantidadColumnas];
 
+        // Arreglo para guardar las columnas donde se encuentran
+        // los puntos de silla
         int[] columnasPuntoSilla =
                 new int[cantidadFilas * cantidadColumnas];
 
+        // Variable que indica cuántos puntos de silla hemos encontrado
         int cantidadPuntosSilla = 0;
 
-        // Llenar matriz
+        // ============================
+        // LLENAR LA MATRIZ
+        // ============================
+
+        // Recorremos todas las filas
         for (int fila = 0; fila < cantidadFilas; fila++) {
+
+            // Recorremos todas las columnas de cada fila
             for (int columna = 0; columna < cantidadColumnas; columna++) {
-                matriz[fila][columna] = aleatorio.nextInt(10) + 1;
+
+                // Generamos un número aleatorio entre 1 y 10
+                // y lo guardamos en la posición correspondiente
+                matriz[fila][columna] =
+                        aleatorio.nextInt(10) + 1;
             }
         }
 
-        // Buscar puntos de silla
+        // ============================
+        // BUSCAR PUNTOS DE SILLA
+        // ============================
+
+        // Recorremos cada fila de la matriz
         for (int fila = 0; fila < cantidadFilas; fila++) {
 
+            // Suponemos inicialmente que el primer elemento
+            // de la fila es el valor mínimo
             int valorMinimo = matriz[fila][0];
+
+            // Guardamos la posición de la columna donde está
+            // el valor mínimo
             int columnaMinima = 0;
 
-            // Buscar mínimo de la fila
-            for (int columna = 1; columna < cantidadColumnas; columna++) {
+            // ============================
+            // BUSCAR EL MÍNIMO DE LA FILA
+            // ============================
 
+            // Comenzamos desde la segunda columna,
+            // porque la primera ya la tenemos guardada
+            for (int columna = 1;
+                 columna < cantidadColumnas;
+                 columna++) {
+
+                // Si encontramos un número menor que el mínimo actual
                 if (matriz[fila][columna] < valorMinimo) {
+
+                    // Actualizamos el valor mínimo
                     valorMinimo = matriz[fila][columna];
+
+                    // Guardamos la columna donde encontramos
+                    // el nuevo mínimo
                     columnaMinima = columna;
                 }
             }
 
+            // Suponemos que el mínimo de la fila también es
+            // el máximo de su columna
             boolean esMayorDeColumna = true;
 
-            // Comprobar si es máximo de la columna
-            for (int otraFila = 0; otraFila < cantidadFilas; otraFila++) {
+            // ============================
+            // COMPROBAR EL MÁXIMO DE LA COLUMNA
+            // ============================
 
+            // Recorremos todas las filas de la columna
+            // donde encontramos el mínimo
+            for (int otraFila = 0;
+                 otraFila < cantidadFilas;
+                 otraFila++) {
+
+                // Si encontramos un valor mayor que nuestro
+                // supuesto punto de silla, significa que
+                // ya no es el máximo de la columna
                 if (matriz[otraFila][columnaMinima] > valorMinimo) {
+
+                    // Indicamos que no es un punto de silla
                     esMayorDeColumna = false;
+
+                    // No necesitamos seguir revisando esta columna
                     break;
                 }
             }
 
+            // ============================
+            // GUARDAR EL PUNTO DE SILLA
+            // ============================
+
+            // Si el valor mínimo de la fila también es
+            // el máximo de su columna, tenemos un punto de silla
             if (esMayorDeColumna) {
 
+                // Guardamos el número de fila
                 filasPuntoSilla[cantidadPuntosSilla] = fila;
+
+                // Guardamos el número de columna
                 columnasPuntoSilla[cantidadPuntosSilla] = columnaMinima;
 
+                // Aumentamos la cantidad de puntos de silla encontrados
                 cantidadPuntosSilla++;
             }
         }
 
+        // ============================
+        // MOSTRAR LA MATRIZ
+        // ============================
+
         System.out.println("Matriz:");
 
+        // Recorremos nuevamente todas las filas
         for (int fila = 0; fila < cantidadFilas; fila++) {
-            for (int columna = 0; columna < cantidadColumnas; columna++) {
+
+            // Recorremos todas las columnas
+            for (int columna = 0;
+                 columna < cantidadColumnas;
+                 columna++) {
+
+                // Mostramos cada elemento de la matriz
+                // \t agrega una tabulación para separar los números
                 System.out.print(matriz[fila][columna] + "\t");
             }
+
+            // Saltamos a la siguiente línea después de cada fila
             System.out.println();
         }
 
+        // ============================
+        // MOSTRAR LOS PUNTOS DE SILLA
+        // ============================
+
         System.out.println("\nPuntos de silla:");
 
-        for (int posicion = 0; posicion < cantidadPuntosSilla; posicion++) {
+        // Recorremos todos los puntos de silla encontrados
+        for (int posicion = 0;
+             posicion < cantidadPuntosSilla;
+             posicion++) {
 
+            // Obtenemos la fila donde está el punto de silla
             int fila = filasPuntoSilla[posicion];
+
+            // Obtenemos la columna donde está el punto de silla
             int columna = columnasPuntoSilla[posicion];
 
+            // Mostramos la fila, columna y valor del punto de silla
             System.out.println(
                     "Fila: " + fila +
                     " Columna: " + columna +
@@ -84,6 +175,8 @@ public class PuntoDeSilla {
             );
         }
 
+        // Si no encontramos ningún punto de silla,
+        // mostramos un mensaje indicando que no existen
         if (cantidadPuntosSilla == 0) {
             System.out.println("No se encontraron puntos de silla.");
         }

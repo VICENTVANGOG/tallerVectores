@@ -1,0 +1,94 @@
+import java.util.Random;
+
+public class MatrizTriangularSuperior {
+
+    public static void main(String[] args) {
+
+        // Creo un objeto de tipo Random para poder generar números aleatorios.
+        Random aleatorio = new Random();
+
+        // Defino la dimensión de mi matriz, en este caso será de 5x5.
+        int dimension = 5;
+
+        // Creo mi matriz de 5 filas por 5 columnas.
+        int[][] matriz = new int[dimension][dimension];
+
+        // Lleno mi matriz con números aleatorios.
+        for (int fila = 0; fila < dimension; fila++) {
+
+            // Recorro cada columna de la fila actual.
+            for (int columna = 0; columna < dimension; columna++) {
+
+                // Coloco en cada posición un número aleatorio entre 0 y 9.
+                matriz[fila][columna] = aleatorio.nextInt(10);
+            }
+        }
+
+        // Creo una variable booleana que inicialmente indica que mi matriz
+        // sí es triangular superior.
+        boolean esTriangularSuperior = true;
+
+        // Reviso los elementos que están debajo de la diagonal principal.
+        // Empiezo desde la fila 1 porque la fila 0 no tiene elementos debajo
+        // de la diagonal.
+        for (int fila = 1; fila < dimension; fila++) {
+
+            // Recorro únicamente las columnas que están antes de la diagonal.
+            for (int columna = 0; columna < fila; columna++) {
+
+                // Compruebo si algún elemento debajo de la diagonal es diferente de 0.
+                if (matriz[fila][columna] != 0) {
+
+                    // Si encuentro un número diferente de 0, significa que
+                    // mi matriz no es triangular superior.
+                    esTriangularSuperior = false;
+
+                    // Salgo del ciclo porque ya encontré un elemento incorrecto.
+                    break;
+                }
+            }
+
+            // Si ya comprobé que no es triangular superior,
+            // salgo también del ciclo principal.
+            if (!esTriangularSuperior) {
+                break;
+            }
+        }
+
+        // Muestro en pantalla el título de mi matriz.
+        System.out.println("Matriz:");
+
+        // Recorro todas las filas de mi matriz para mostrarla.
+        for (int fila = 0; fila < dimension; fila++) {
+
+            // Recorro todas las columnas de la fila actual.
+            for (int columna = 0; columna < dimension; columna++) {
+
+                // Muestro el valor que se encuentra en cada posición de mi matriz.
+                System.out.print(matriz[fila][columna] + "\t");
+            }
+
+            // Hago un salto de línea después de mostrar cada fila.
+            System.out.println();
+        }
+
+        // Compruebo el resultado de la variable booleana para mostrar
+        // si mi matriz es o no triangular superior.
+        if (esTriangularSuperior) {
+
+            // Muestro este mensaje si todos los elementos debajo
+            // de la diagonal principal son iguales a 0.
+            System.out.println(
+                    "La matriz es triangular superior."
+            );
+
+        } else {
+
+            // Muestro este mensaje si encuentro al menos un elemento
+            // diferente de 0 debajo de la diagonal principal.
+            System.out.println(
+                    "La matriz no es triangular superior."
+            );
+        }
+    }
+}

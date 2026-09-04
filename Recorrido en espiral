@@ -4,90 +4,170 @@ public class RecorridoEspiral {
 
     public static void main(String[] args) {
 
+        // Creamos un objeto Random para generar números aleatorios
         Random aleatorio = new Random();
 
+        // Definimos la cantidad de filas y columnas
         int cantidadFilas = 4;
         int cantidadColumnas = 5;
 
+        // Creamos una matriz de 4 filas por 5 columnas
         int[][] matriz = new int[cantidadFilas][cantidadColumnas];
 
-        // Llenar matriz HOLSA
+        // ============================
+        // LLENAR LA MATRIZ
+        // ============================
+
+        // Recorremos todas las filas
         for (int fila = 0; fila < cantidadFilas; fila++) {
-            for (int columna = 0; columna < cantidadColumnas; columna++) {
-                matriz[fila][columna] = aleatorio.nextInt(100) + 1;
+
+            // Recorremos todas las columnas de cada fila
+            for (int columna = 0;
+                 columna < cantidadColumnas;
+                 columna++) {
+
+                // Generamos un número aleatorio entre 1 y 100
+                // y lo guardamos en la matriz
+                matriz[fila][columna] =
+                        aleatorio.nextInt(100) + 1;
             }
         }
+
+        // ============================
+        // MOSTRAR LA MATRIZ
+        // ============================
 
         System.out.println("Matriz:");
 
+        // Recorremos las filas de la matriz
         for (int fila = 0; fila < cantidadFilas; fila++) {
-            for (int columna = 0; columna < cantidadColumnas; columna++) {
+
+            // Recorremos las columnas de cada fila
+            for (int columna = 0;
+                 columna < cantidadColumnas;
+                 columna++) {
+
+                // Mostramos cada número de la matriz
+                // \t agrega un espacio de tabulación
                 System.out.print(matriz[fila][columna] + "\t");
             }
+
+            // Pasamos a la siguiente línea
+            // después de terminar cada fila
             System.out.println();
         }
 
+        // ============================
+        // DEFINIR LOS LÍMITES
+        // ============================
+
+        // Límite superior: comienza en la primera fila
         int limiteSuperior = 0;
+
+        // Límite inferior: comienza en la última fila
         int limiteInferior = cantidadFilas - 1;
+
+        // Límite izquierdo: comienza en la primera columna
         int limiteIzquierdo = 0;
+
+        // Límite derecho: comienza en la última columna
         int limiteDerecho = cantidadColumnas - 1;
 
+        // Mostramos el título del recorrido
         System.out.println("\nRecorrido en espiral:");
 
+        // Repetimos mientras todavía existan filas y columnas
+        // que no hayan sido recorridas
         while (limiteSuperior <= limiteInferior &&
                limiteIzquierdo <= limiteDerecho) {
 
-            // Superior: izquierda a derecha
+            // ============================
+            // RECORRER PARTE SUPERIOR
+            // ============================
+
+            // Recorremos la fila superior
+            // desde la izquierda hacia la derecha
             for (int columna = limiteIzquierdo;
                  columna <= limiteDerecho;
                  columna++) {
 
+                // Mostramos el elemento de la fila superior
                 System.out.print(
                         matriz[limiteSuperior][columna] + " "
                 );
             }
 
+            // Movemos el límite superior una fila hacia abajo
+            // porque ya hemos recorrido esa fila
             limiteSuperior++;
 
-            // Derecha: arriba hacia abajo
+            // ============================
+            // RECORRER PARTE DERECHA
+            // ============================
+
+            // Recorremos la columna derecha
+            // desde arriba hacia abajo
             for (int fila = limiteSuperior;
                  fila <= limiteInferior;
                  fila++) {
 
+                // Mostramos el elemento de la columna derecha
                 System.out.print(
                         matriz[fila][limiteDerecho] + " "
                 );
             }
 
+            // Movemos el límite derecho una columna hacia la izquierda
+            // porque ya hemos recorrido esa columna
             limiteDerecho--;
 
-            // Inferior: derecha a izquierda
+            // ============================
+            // RECORRER PARTE INFERIOR
+            // ============================
+
+            // Comprobamos que todavía quede una fila
+            // sin recorrer
             if (limiteSuperior <= limiteInferior) {
 
+                // Recorremos la fila inferior
+                // desde la derecha hacia la izquierda
                 for (int columna = limiteDerecho;
                      columna >= limiteIzquierdo;
                      columna--) {
 
+                    // Mostramos el elemento de la fila inferior
                     System.out.print(
                             matriz[limiteInferior][columna] + " "
                     );
                 }
 
+                // Movemos el límite inferior una fila hacia arriba
+                // porque ya hemos recorrido esa fila
                 limiteInferior--;
             }
 
-            // Izquierda: abajo hacia arriba
+            // ============================
+            // RECORRER PARTE IZQUIERDA
+            // ============================
+
+            // Comprobamos que todavía quede una columna
+            // sin recorrer
             if (limiteIzquierdo <= limiteDerecho) {
 
+                // Recorremos la columna izquierda
+                // desde abajo hacia arriba
                 for (int fila = limiteInferior;
                      fila >= limiteSuperior;
                      fila--) {
 
+                    // Mostramos el elemento de la columna izquierda
                     System.out.print(
                             matriz[fila][limiteIzquierdo] + " "
                     );
                 }
 
+                // Movemos el límite izquierdo una columna hacia la derecha
+                // porque ya hemos recorrido esa columna
                 limiteIzquierdo++;
             }
         }

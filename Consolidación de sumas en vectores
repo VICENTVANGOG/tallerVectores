@@ -4,48 +4,76 @@ public class SumasEnVectores {
 
     public static void main(String[] args) {
 
+        // Creo un objeto Random para poder generar números aleatorios.
         Random aleatorio = new Random();
 
+        // Defino la cantidad de filas que tendrá mi matriz.
         int cantidadFilas = 4;
+
+        // Defino la cantidad de columnas que tendrá mi matriz.
         int cantidadColumnas = 5;
 
+        // Creo mi matriz con 4 filas y 5 columnas.
         int[][] matriz = new int[cantidadFilas][cantidadColumnas];
 
+        // Creo un vector para guardar la suma de cada una de las filas.
         int[] sumaFilas = new int[cantidadFilas];
+
+        // Creo un vector para guardar la suma de cada una de las columnas.
         int[] sumaColumnas = new int[cantidadColumnas];
 
-        // Llenar matriz y calcular sumas
+        // Recorro todas las filas de mi matriz.
         for (int fila = 0; fila < cantidadFilas; fila++) {
 
+            // Recorro todas las columnas de cada fila.
             for (int columna = 0; columna < cantidadColumnas; columna++) {
 
+                // Coloco en cada posición de mi matriz un número aleatorio
+                // entre 1 y 10.
                 matriz[fila][columna] = aleatorio.nextInt(10) + 1;
 
+                // Voy acumulando la suma de los elementos de cada fila.
                 sumaFilas[fila] += matriz[fila][columna];
+
+                // También voy acumulando la suma de los elementos de cada columna.
                 sumaColumnas[columna] += matriz[fila][columna];
             }
         }
 
+        // Muestro en pantalla el título de mi matriz.
         System.out.println("Matriz:");
 
+        // Recorro todas las filas para poder mostrar mi matriz.
         for (int fila = 0; fila < cantidadFilas; fila++) {
 
+            // Recorro todas las columnas de la fila actual.
             for (int columna = 0; columna < cantidadColumnas; columna++) {
+
+                // Muestro el valor que tengo en cada posición de mi matriz.
                 System.out.print(matriz[fila][columna] + "\t");
             }
 
+            // Hago un salto de línea después de mostrar cada fila.
             System.out.println();
         }
 
+        // Muestro el título correspondiente a las sumas de las filas.
         System.out.println("\nSuma de las filas:");
 
+        // Recorro mi vector de sumas de filas.
         for (int fila = 0; fila < cantidadFilas; fila++) {
+
+            // Muestro el número de la fila y la suma que obtuve.
             System.out.println("Fila " + fila + ": " + sumaFilas[fila]);
         }
 
+        // Muestro el título correspondiente a las sumas de las columnas.
         System.out.println("\nSuma de las columnas:");
 
+        // Recorro mi vector de sumas de columnas.
         for (int columna = 0; columna < cantidadColumnas; columna++) {
+
+            // Muestro el número de la columna y la suma que obtuve.
             System.out.println("Columna " + columna + ": " + sumaColumnas[columna]);
         }
     }

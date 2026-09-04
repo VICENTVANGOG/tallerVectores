@@ -29,15 +29,9 @@ public class RotarMatriz90 {
         // Transpuesta
         for (int fila = 0; fila < dimension; fila++) {
 
-            for (int columna = fila + 1;
-                 columna < dimension;
-                 columna++) {
-
+            for (int columna = fila + 1;columna < dimension; columna++) {
                 int temporal = matriz[fila][columna];
-
-                matriz[fila][columna] =
-                        matriz[columna][fila];
-
+                matriz[fila][columna] = matriz[columna][fila];
                 matriz[columna][fila] = temporal;
             }
         }
